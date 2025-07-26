@@ -1026,7 +1026,7 @@ What began as curiosity has grown into a focused career path. My goal is not jus
                 className="flex items-center text-muted-foreground hover:text-primary transition-colors"
               >
                 <Mail className="w-5 h-5 mr-2" />
-                keerthikumar8608@email.com
+                keerthikumar8608@gmail.com
               </a>
             </div>
             <div className="flex justify-center md:justify-start space-x-6 mb-8">
