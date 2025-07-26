@@ -965,10 +965,10 @@ What began as curiosity has grown into a focused career path. My goal is not jus
 
   return (
     <div className="min-h-screen">
-      {/* Navigation */}
+      {/* Navigation - Mobile-friendly positioning */}
       {mounted && (
-        <nav className="fixed right-4 top-1/2 transform -translate-y-1/2 z-50">
-          <div className="nav-container flex flex-col space-y-1 rounded-xl p-2 shadow-md border bg-background/95 backdrop-blur-sm min-w-[90px]">
+        <nav className="fixed right-2 top-4 md:right-4 md:top-1/2 md:transform md:-translate-y-1/2 z-50">
+          <div className="nav-container flex flex-row md:flex-col space-x-1 md:space-x-0 md:space-y-1 rounded-xl p-2 shadow-md border bg-background/95 backdrop-blur-sm min-w-[90px]">
             {sections.map((section) => (
               <button
                 key={section.id}
@@ -986,37 +986,33 @@ What began as curiosity has grown into a focused career path. My goal is not jus
         </nav>
       )}
 
-      {/* Hero Section */}
-      <section id="hero" className="min-h-screen flex flex-col items-center justify-start">
+      {/* Hero Section - Mobile-friendly with proper spacing */}
+      <section id="hero" className="min-h-screen flex flex-col items-center justify-start pt-16 md:pt-0">
         {/* Banner Carousel - relative for positioning profile photo */}
         <div className="w-full relative">
           <HeroBannerCarousel images={bannerImages} />
-          {/* Profile Photo - Centered at bottom center of banner, matching red cross reference */}
-          <div
-            className="absolute left-1/2 bottom-0 z-20"
-            style={{ transform: 'translate(-250%, 50%)' }}
-          >
-            <Image
+          {/* Profile Photo - Responsive and centered, moved 50px left */}
+          <div className="absolute left-1/2 bottom-0 z-20 profile-photo-position">
+            <img
               src="/profile.jpg"
               alt="Profile Photo"
-              width={200}
-              height={200}
-              className="rounded-full shadow-lg bg-white border-4 border-white"
-              priority
-              sizes="200px"
+              className="w-24 h-24 md:w-32 md:h-32 lg:w-40 lg:h-40 rounded-full shadow-lg bg-white border-4 border-white mx-auto no-select"
+              draggable={false}
+              onContextMenu={(e) => e.preventDefault()}
+              onDragStart={(e) => e.preventDefault()}
             />
           </div>
         </div>
 
-        {/* Profile Info and About Me - left and right columns */}
-        <div className="max-w-6xl mx-auto relative mt-12 grid grid-cols-1 md:grid-cols-2 gap-12 items-start">
-          {/* Left Column: Profile Photo and Info */}
-          <div className="flex flex-col items-center md:items-start">
-            {/* Add gap below profile photo */}
-            <div className="mb-14"></div>
-            <h1 className="text-4xl md:text-5xl font-bold mb-2 text-foreground">Keerthi Kumar M</h1>
-            <p className="text-xl md:text-2xl text-muted-foreground mb-4">Mechanical Engineer</p>
-            <div className="flex flex-col space-y-3 mb-6 items-center md:items-start">
+        {/* Profile Info and About Me - Mobile-first responsive layout */}
+        <div className="max-w-6xl mx-auto relative mt-16 md:mt-12 px-4 md:px-6 grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-12 items-start w-full">
+          {/* Left Column: Profile Info */}
+          <div className="flex flex-col items-center lg:items-start order-1 lg:order-1">
+            {/* Add gap below profile photo on mobile */}
+            <div className="mb-8 md:mb-14"></div>
+            <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-2 text-foreground text-center lg:text-left">Keerthi Kumar M</h1>
+            <p className="text-lg md:text-xl lg:text-2xl text-muted-foreground mb-4 text-center lg:text-left">Mechanical Engineer</p>
+            <div className="flex flex-col space-y-3 mb-6 items-center lg:items-start w-full">
               <div className="flex items-center text-muted-foreground">
                 <MapPin className="w-5 h-5 mr-2" />
                 Chennai, Tamilnadu
@@ -1029,7 +1025,7 @@ What began as curiosity has grown into a focused career path. My goal is not jus
                 keerthikumar8608@gmail.com
               </a>
             </div>
-            <div className="flex justify-center md:justify-start space-x-6 mb-8">
+            <div className="flex justify-center lg:justify-start space-x-4 md:space-x-6 mb-8 flex-wrap">
               <a
                 href="https://www.linkedin.com/in/keerthi-kumar-m-11904b27b/"
                 target="_blank"
@@ -1069,11 +1065,11 @@ What began as curiosity has grown into a focused career path. My goal is not jus
             </div>
           </div>
 
-          {/* Right Column: About Me - moved and styled for green box */}
-          <div className="flex flex-col items-center justify-center w-full h-full" style={{ transform: 'translateX(-50px)' }}>
-            <div className="w-full md:w-[600px] lg:w-[650px]">
+          {/* Right Column: About Me - Mobile-responsive */}
+          <div className="flex flex-col items-center justify-center w-full order-2 lg:order-2">
+            <div className="w-full max-w-lg lg:max-w-full xl:max-w-full">
               <h2 className="text-2xl md:text-3xl font-bold mb-4 text-foreground text-center">About Me</h2>
-              <p className="text-lg text-muted-foreground leading-relaxed text-justify mb-6">
+              <p className="text-base md:text-lg text-muted-foreground leading-relaxed text-justify mb-6">
                 Mechanical Engineering student passionate about automotive design, motorsport innovation, and
                 future-focused engineering. Certified SolidWorks Associate with hands-on experience at Daimler India
                 (DICV). Experienced in projects spanning product development, research, mechatronics, automation, and
@@ -1081,12 +1077,12 @@ What began as curiosity has grown into a focused career path. My goal is not jus
                 user-centered designs.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <Button asChild>
+                <Button asChild className="w-full sm:w-auto">
                   <a href="/placeholder.pdf" download="Alex_Johnson_Resume.pdf">
                     Download Resume
                   </a>
                 </Button>
-                <Button asChild variant="outline">
+                <Button asChild variant="outline" className="w-full sm:w-auto">
                   <a href="/placeholder.pdf" download="Alex_Johnson_Portfolio.pdf">
                     Download Portfolio
                   </a>
@@ -1097,46 +1093,46 @@ What began as curiosity has grown into a focused career path. My goal is not jus
         </div>
       </section>
       
-      {/* Education Section */}
-      <section id="education" className="py-20 px-6 bg-background transition-colors duration-500">
+      {/* Education Section - Mobile-first responsive design */}
+      <section id="education" className="py-16 md:py-20 px-4 md:px-6 bg-background transition-colors duration-500">
         <div className="max-w-6xl mx-auto">
-          <h2 className="text-3xl md:text-4xl font-bold text-center mb-16 text-foreground">Education</h2>
+          <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-center mb-12 md:mb-16 text-foreground">Education</h2>
           
-          {/* Education Timeline */}
-          <div className="relative flex flex-col md:flex-row items-center justify-center gap-8 md:gap-16">
+          {/* Education Timeline - Mobile-first responsive */}
+          <div className="relative flex flex-col md:flex-row items-center justify-center gap-6 md:gap-8 lg:gap-16">
             {/* Education Item 1 - School */}
-            <div className="flex flex-col items-center relative">
+            <div className="flex flex-col items-center relative w-full md:w-auto">
               {/* Education Card */}
-              <div className="bg-card text-card-foreground rounded-lg shadow-md border border-border p-6 w-64 text-center hover:shadow-lg transition-shadow duration-300">
-                <h3 className="text-lg font-semibold mb-2">B.E. Mechanical Engineering</h3>
+              <div className="bg-card text-card-foreground rounded-lg shadow-md border border-border p-4 md:p-6 w-full max-w-sm md:w-64 text-center hover:shadow-lg transition-shadow duration-300">
+                <h3 className="text-base md:text-lg font-semibold mb-2">B.E. Mechanical Engineering</h3>
                 <p className="text-sm text-muted-foreground mb-2">National Engineering College</p>
                 <p className="text-sm font-medium">2022-2026</p>
               </div>
             </div>
 
-            {/* Connecting Line 1 */}
-            <div className="hidden md:block w-16 h-0.5 bg-border"></div>
-            <div className="md:hidden w-0.5 h-8 bg-border"></div>
+            {/* Connecting Line 1 - Responsive */}
+            <div className="hidden md:block w-12 lg:w-16 h-0.5 bg-border"></div>
+            <div className="md:hidden w-0.5 h-6 bg-border"></div>
 
-            {/* Education Item 2 - College */}
-            <div className="flex flex-col items-center relative">
+            {/* Education Item 2 - Higher Secondary */}
+            <div className="flex flex-col items-center relative w-full md:w-auto">
               {/* Education Card */}
-              <div className="bg-card text-card-foreground rounded-lg shadow-md border border-border p-6 w-64 text-center hover:shadow-lg transition-shadow duration-300">
-                <h3 className="text-lg font-semibold mb-2">Higher secondary</h3>
+              <div className="bg-card text-card-foreground rounded-lg shadow-md border border-border p-4 md:p-6 w-full max-w-sm md:w-64 text-center hover:shadow-lg transition-shadow duration-300">
+                <h3 className="text-base md:text-lg font-semibold mb-2">Higher secondary</h3>
                 <p className="text-sm text-muted-foreground mb-2">Kalaimagal Vidhya Mandhir Matric Hr Sec School</p>
                 <p className="text-sm font-medium">2020-2022</p>
               </div>
             </div>
 
-            {/* Connecting Line 2 */}
-            <div className="hidden md:block w-16 h-0.5 bg-border"></div>
-            <div className="md:hidden w-0.5 h-8 bg-border"></div>
+            {/* Connecting Line 2 - Responsive */}
+            <div className="hidden md:block w-12 lg:w-16 h-0.5 bg-border"></div>
+            <div className="md:hidden w-0.5 h-6 bg-border"></div>
 
-            {/* Education Item 3 - University */}
-            <div className="flex flex-col items-center relative">
+            {/* Education Item 3 - SSLC */}
+            <div className="flex flex-col items-center relative w-full md:w-auto">
               {/* Education Card */}
-              <div className="bg-card text-card-foreground rounded-lg shadow-md border border-border p-6 w-64 text-center hover:shadow-lg transition-shadow duration-300">
-                <h3 className="text-lg font-semibold mb-2">SSLC</h3>
+              <div className="bg-card text-card-foreground rounded-lg shadow-md border border-border p-4 md:p-6 w-full max-w-sm md:w-64 text-center hover:shadow-lg transition-shadow duration-300">
+                <h3 className="text-base md:text-lg font-semibold mb-2">SSLC</h3>
                 <p className="text-sm text-muted-foreground mb-2">Kalaimagal Vidhya Mandhir Matric Hr Sec School</p>
                 <p className="text-sm font-medium">2019-2020</p>
               </div>
@@ -1145,18 +1141,18 @@ What began as curiosity has grown into a focused career path. My goal is not jus
         </div>
       </section>
       
-      {/* Projects Section */}
-      <section id="projects" className="py-20 px-6 bg-muted/20 transition-colors duration-500">
+      {/* Projects Section - Mobile-first responsive design */}
+      <section id="projects" className="py-16 md:py-20 px-4 md:px-6 bg-muted/20 transition-colors duration-500">
         <div className="max-w-6xl mx-auto">
-          <h2 className="text-3xl md:text-4xl font-bold text-center mb-16 text-foreground">Projects</h2>
+          <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-center mb-12 md:mb-16 text-foreground">Projects</h2>
           {/* College Projects */}
-          <div className="mb-16">
-            <h3 className="text-2xl font-semibold mb-8 text-foreground">College Projects</h3>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="mb-12 md:mb-16">
+            <h3 className="text-xl md:text-2xl font-semibold mb-6 md:mb-8 text-foreground">College Projects</h3>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
               {collegeProjects.map((project, index) => (
                 <div
                   key={index}
-                  className="cursor-pointer hover:shadow-lg transition-all duration-300 hover:scale-105 rounded-lg overflow-hidden bg-card border border-border shadow-sm relative"
+                  className="cursor-pointer hover:shadow-lg transition-all duration-300 hover:scale-105 rounded-lg overflow-hidden bg-card border border-border shadow-sm relative w-full"
                   onClick={() => setSelectedProject(project)}
                 >
                   {/* Status Badge */}
@@ -1166,14 +1162,14 @@ What began as curiosity has grown into a focused career path. My goal is not jus
                   <img
                     src={project.images[0]}
                     alt={project.title}
-                    className="w-full h-48 object-cover rounded-t-lg no-select"
+                    className="w-full h-40 md:h-48 object-cover rounded-t-lg no-select"
                     loading="lazy"
                     draggable={false}
                     onContextMenu={(e) => e.preventDefault()}
                     onDragStart={(e) => e.preventDefault()}
                   />
                   <div className="p-4">
-                    <h3 className="text-lg font-semibold mb-2 text-card-foreground">{project.title}</h3>
+                    <h3 className="text-base md:text-lg font-semibold mb-2 text-card-foreground">{project.title}</h3>
                   </div>
                   <span
                     className="absolute bottom-2 right-4 text-xs font-semibold text-muted-foreground bg-background/80 px-2 py-1 rounded shadow border border-border pointer-events-none select-none"
@@ -1193,12 +1189,12 @@ What began as curiosity has grown into a focused career path. My goal is not jus
           </div>
           {/* Personal Projects */}
           <div>
-            <h3 className="text-2xl font-semibold mb-8 text-foreground">Personal Projects</h3>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <h3 className="text-xl md:text-2xl font-semibold mb-6 md:mb-8 text-foreground">Personal Projects</h3>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
               {personalProjects.map((project, index) => (
                 <div
                   key={index}
-                  className="cursor-pointer hover:shadow-lg transition-all duration-300 hover:scale-105 rounded-lg overflow-hidden bg-card border border-border shadow-sm relative"
+                  className="cursor-pointer hover:shadow-lg transition-all duration-300 hover:scale-105 rounded-lg overflow-hidden bg-card border border-border shadow-sm relative w-full"
                   onClick={() => setSelectedPersonalProject(project)}
                 >
                   {/* Status Badge */}
@@ -1208,14 +1204,14 @@ What began as curiosity has grown into a focused career path. My goal is not jus
                   <img
                     src={project.images[0]}
                     alt={project.title}
-                    className="w-full h-48 object-cover rounded-t-lg no-select"
+                    className="w-full h-40 md:h-48 object-cover rounded-t-lg no-select"
                     loading="lazy"
                     draggable={false}
                     onContextMenu={(e) => e.preventDefault()}
                     onDragStart={(e) => e.preventDefault()}
                   />
                   <div className="p-4">
-                    <h3 className="text-lg font-semibold mb-2 text-card-foreground">{project.title}</h3>
+                    <h3 className="text-base md:text-lg font-semibold mb-2 text-card-foreground">{project.title}</h3>
                   </div>
                   <span
                     className="absolute bottom-2 right-4 text-xs font-semibold text-muted-foreground bg-background/80 px-2 py-1 rounded shadow border border-border pointer-events-none select-none"
@@ -1352,19 +1348,19 @@ What began as curiosity has grown into a focused career path. My goal is not jus
           </div>
         </div>
       </section>
-      {/* Certificates Section */}
-      <section id="certificates" className="py-20 px-6">
+      {/* Certificates Section - Mobile-first responsive design */}
+      <section id="certificates" className="py-16 md:py-20 px-4 md:px-6">
         <div className="max-w-6xl mx-auto">
-          <h2 className="text-3xl md:text-4xl font-bold text-center mb-16 text-foreground">Certificates</h2>
+          <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-center mb-12 md:mb-16 text-foreground">Certificates</h2>
           <Tabs defaultValue="dassault" className="w-full">
-            <TabsList className="grid w-full grid-cols-3 mb-8">
-              <TabsTrigger value="dassault">Dassault Systems</TabsTrigger>
-              <TabsTrigger value="nptel">NPTEL</TabsTrigger>
-              <TabsTrigger value="events">Events</TabsTrigger> {/* Renamed tab */}
+            <TabsList className="grid w-full grid-cols-3 mb-6 md:mb-8 text-xs md:text-sm">
+              <TabsTrigger value="dassault" className="px-2 md:px-4">Dassault Systems</TabsTrigger>
+              <TabsTrigger value="nptel" className="px-2 md:px-4">NPTEL</TabsTrigger>
+              <TabsTrigger value="events" className="px-2 md:px-4">Events</TabsTrigger>
             </TabsList>
 
             <TabsContent value="dassault">
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
                 {certificates.dassault.map((cert, index) => (
                   <Dialog key={index}>
                     <DialogTrigger asChild>

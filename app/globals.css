@@ -104,12 +104,45 @@
 @media (max-width: 768px) {
   .nav-container {
     right: 8px !important;
-    min-width: 80px;
+    top: 16px !important;
+    min-width: auto !important;
+    flex-direction: row !important;
+    max-width: calc(100vw - 32px);
+    overflow-x: auto;
   }
   
   .nav-button {
     font-size: 10px;
-    padding: 4px 6px;
+    padding: 4px 8px;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+  
+  /* Ensure profile photo is properly sized on mobile */
+  .profile-photo-mobile {
+    width: 96px !important;
+    height: 96px !important;
+  }
+  
+  /* Add padding to sections to account for fixed nav */
+  section {
+    scroll-margin-top: 80px;
+  }
+  
+  /* Ensure proper spacing for mobile layouts */
+  .mobile-spacing {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+}
+
+@media (min-width: 769px) {
+  .nav-container {
+    flex-direction: column !important;
+  }
+  
+  section {
+    scroll-margin-top: 0;
   }
 }
 
@@ -154,4 +187,15 @@ img::selection {
 
 img::-moz-selection {
   background: transparent;
+}
+
+/* Profile photo responsive positioning */
+.profile-photo-position {
+  transform: translate(-50%, 50%);
+}
+
+@media (min-width: 768px) {
+  .profile-photo-position {
+    transform: translate(calc(-50% - 375px), 50%);
+  }
 }
