@@ -89,7 +89,7 @@ export default function BlogPage() {
       
       {/* Header */}
       <header className="bg-background border-b border-border">
-        <div className="max-w-4xl mx-auto px-4 md:px-6 py-4">
+        <div className="max-w-4xl mx-auto px-6 py-4">
           <Link href="/#blogs">
             <Button variant="ghost" size="sm">
               <ArrowLeft className="w-4 h-4 mr-2" />
@@ -100,7 +100,7 @@ export default function BlogPage() {
       </header>
 
       {/* Blog Content */}
-      <main className="max-w-4xl mx-auto px-4 md:px-6 py-12">
+      <main className="max-w-4xl mx-auto px-6 py-12">
         {/* Blog Header */}
         <div className="mb-12">
           <h1 className="text-4xl md:text-5xl font-bold text-foreground mb-6 leading-tight">
