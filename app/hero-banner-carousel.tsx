@@ -23,7 +23,7 @@ const HeroBannerCarousel: React.FC<HeroBannerCarouselProps> = ({ images }) => {
       navigation={false}
       pagination={false}
       modules={[Autoplay]}
-      className="h-[50vh] sm:h-[55vh] md:h-[60vh] lg:h-[65vh] w-full"
+      className="h-[35vh] sm:h-[40vh] md:h-[45vh] w-full"
     >
       {images.map((image, index) => (
         <SwiperSlide key={index}>

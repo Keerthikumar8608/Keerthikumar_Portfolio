@@ -30,6 +30,7 @@ import { ImageCarousel } from "@/components/image-carousel" // Keep for project/
 import SwiperCarousel from './swiper-carousel';
 import HeroBannerCarousel from './hero-banner-carousel';
 import { ThemeToggle } from "@/components/theme-toggle"
+import NavigationBar from "@/components/navigation-bar"
 
 // Define the type for a project
 interface Project {
@@ -114,18 +115,14 @@ const ProjectModal = ({
         <h2 className="text-2xl font-bold mb-4 text-foreground">{project.title}</h2>
         <p className="text-sm text-muted-foreground mb-4">Completion: {project.date}</p>
         
-        {/* Mobile-first responsive layout for project image and links */}
-        <div className="mb-4 flex flex-col lg:flex-row lg:justify-center lg:items-center gap-6">
-          {/* Image container - centered on mobile */}
-          <div className="w-full lg:w-[420px] h-[320px] px-4 lg:px-12 py-0 flex items-center justify-center rounded-lg">
-            <div className="w-full max-w-[320px] h-[320px] relative">
+        <div className="mb-4 flex flex-col md:flex-row justify-center items-center gap-6">
+          <div className="w-full max-w-[420px] h-[320px] px-6 md:px-12 py-0 flex items-center justify-center rounded-lg">
+            <div className="w-[320px] h-[320px] relative">
               <SwiperCarousel images={project.images} />
             </div>
           </div>
-          
-          {/* Project links - below image on mobile, right side on desktop */}
           {(project.projectLink || project.projectLinks) && (
-            <div className="flex flex-col items-center gap-3">
+            <div className="flex flex-col items-center gap-3 w-full md:w-auto">
               {project.projectLinks ? (
                 // Multiple links layout
                 project.projectLinks.map((link, index) => (
@@ -878,16 +875,14 @@ What began as curiosity has grown into a focused career path. My goal is not jus
     if (!mounted) return
 
     const handleScroll = () => {
-      const sections = ["hero", "education", "projects", "skills", "experience", "certificates", "blogs"]
-      const scrollPosition = window.scrollY + 150 // Increased offset for better detection
+      const sections = ["hero", "education", "projects", "skills", "experience", "certificates", "blogs"] // 'skills' is still here for scroll tracking
+      const scrollPosition = window.scrollY + 100
 
-      // Check sections from bottom to top to prioritize lower sections
-      for (let i = sections.length - 1; i >= 0; i--) {
-        const section = sections[i]
+      for (const section of sections) {
         const element = document.getElementById(section)
         if (element) {
           const { offsetTop, offsetHeight } = element
-          if (scrollPosition >= offsetTop) {
+          if (scrollPosition >= offsetTop && scrollPosition < offsetTop + offsetHeight) {
             setActiveSection(section)
             break
           }
@@ -896,7 +891,6 @@ What began as curiosity has grown into a focused career path. My goal is not jus
     }
 
     window.addEventListener("scroll", handleScroll)
-    handleScroll() // Call immediately to set initial state
     return () => window.removeEventListener("scroll", handleScroll)
   }, [mounted])
 
@@ -973,25 +967,7 @@ What began as curiosity has grown into a focused career path. My goal is not jus
   return (
     <div className="min-h-screen">
       {/* Navigation - Mobile-friendly positioning */}
-      {mounted && (
-        <nav className="fixed right-2 top-4 md:right-4 md:top-1/2 md:transform md:-translate-y-1/2 z-50">
-          <div className="nav-container flex flex-row md:flex-col space-x-1 md:space-x-0 md:space-y-1 rounded-xl p-2 shadow-md border bg-background/95 backdrop-blur-sm min-w-[90px]">
-            {sections.map((section) => (
-              <button
-                key={section.id}
-                onClick={() => scrollToSection(section.id)}
-                className={`nav-button text-xs font-medium transition-all duration-200 px-2 py-1.5 rounded-lg hover:bg-muted hover:text-foreground ${
-                  activeSection === section.id 
-                    ? 'active bg-muted text-foreground' 
-                    : 'text-muted-foreground'
-                }`}
-              >
-                {section.label}
-              </button>
-            ))}
-          </div>
-        </nav>
-      )}
+      <NavigationBar activeSection={activeSection} onSectionClick={scrollToSection} />
 
       {/* Hero Section - Mobile-friendly with proper spacing */}
       <section id="hero" className="min-h-screen flex flex-col items-center justify-start pt-16 md:pt-0">
@@ -1289,12 +1265,12 @@ What began as curiosity has grown into a focused career path. My goal is not jus
                               loading="lazy"
                             />
                           </CardHeader>
-                          <CardContent className="p-3">
-                            <CardTitle className={`mb-2 text-foreground text-left ${exp.title === 'In-Plant Training' ? 'text-lg font-bold' : 'text-base'}`}>{exp.title}</CardTitle>
-                            <CardDescription className="font-semibold text-blue-600 mb-2 text-sm text-left">
+                          <CardContent className="p-4 text-center">
+                            <CardTitle className={`mb-2 text-foreground ${exp.title === 'In-Plant Training' ? 'text-xl font-bold' : 'text-base font-semibold'}`}>{exp.title}</CardTitle>
+                            <CardDescription className="font-medium text-blue-600 mb-2 text-sm">
                               {exp.company}
                             </CardDescription>
-                            <div className="flex items-center text-xs text-muted-foreground">
+                            <div className="flex items-center justify-center text-xs text-muted-foreground">
                               <Calendar className="w-3 h-3 mr-1" />
                               {exp.duration}
                             </div>
@@ -1305,31 +1281,31 @@ What began as curiosity has grown into a focused career path. My goal is not jus
                         </span>
                         </Card>
                       </DialogTrigger>
-                      <DialogContent className="max-w-xl max-h-[80vh] overflow-y-auto">
-                        <DialogHeader>
-                          <DialogTitle className="text-base font-semibold text-foreground">{exp.title}</DialogTitle>
-                          <DialogDescription className="text-sm text-muted-foreground">
+                      <DialogContent className="max-w-2xl max-h-[70vh] overflow-y-auto">
+                        <DialogHeader className="relative">
+                          <DialogTitle className="text-foreground pr-8">{exp.title}</DialogTitle>
+                          <DialogDescription className="text-muted-foreground">
                             {exp.company} • {exp.duration}
                           </DialogDescription>
                         </DialogHeader>
-                        <div className="space-y-3">
+                        <div className="space-y-4">
                           <Image
                             src={exp.image || "/placeholder.svg"}
                             alt={exp.company}
-                            width={500}
-                            height={200}
-                            className="w-full h-40 object-cover rounded-lg"
+                            width={600}
+                            height={300}
+                            className="w-full h-48 object-cover rounded-lg"
                             loading="lazy"
                           />
-                          <p className="text-sm text-foreground leading-relaxed text-justify">{exp.description}</p>
+                          <p className="text-sm text-foreground leading-relaxed">{exp.description}</p>
                           {exp.skills && (
-                            <div className="mt-3">
-                              <h4 className="text-sm font-semibold mb-2 text-foreground">Skills</h4>
+                            <div className="mt-4">
+                              <h4 className="text-base font-semibold mb-2 text-foreground">Skills</h4>
                               <div className="flex flex-wrap gap-2">
                                 {exp.skills.map((skill, idx) => (
                                   <span
                                     key={idx}
-                                    className="px-3 py-1 rounded-full bg-white text-black font-medium text-xs whitespace-nowrap border border-black"
+                                    className="px-3 py-1 rounded-full bg-white text-black font-medium text-sm whitespace-nowrap border border-black"
                                   >
                                     {skill}
                                   </span>

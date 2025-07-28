@@ -7,6 +7,7 @@ import { Badge } from "@/components/ui/badge"
 import { Calendar, ArrowLeft, User } from "lucide-react"
 import { ProtectedImage } from "@/components/protected-image"
 import { ImageCarousel } from "@/components/image-carousel"
+import NavigationBar from "@/components/navigation-bar"
 
 // Blog data - in a real app, this would come from a CMS or database
 const blogPosts = [
@@ -83,6 +84,9 @@ export default function BlogPage() {
 
   return (
     <div className="min-h-screen bg-background">
+      {/* Navigation */}
+      <NavigationBar />
+      
       {/* Header */}
       <header className="bg-background border-b border-border">
         <div className="max-w-4xl mx-auto px-6 py-4">
