@@ -194,8 +194,8 @@ img::-moz-selection {
   transform: translate(-50%, 50%);
 }
 
-@media (min-width: 768px) {
+@media (min-width: 1024px) {
   .profile-photo-position {
-    transform: translate(calc(-50% - 375px), 50%);
+    transform: translate(calc(-50% - 365px), 50%);
   }
 }
