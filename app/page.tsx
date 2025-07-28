@@ -114,12 +114,16 @@ const ProjectModal = ({
         <h2 className="text-2xl font-bold mb-4 text-foreground">{project.title}</h2>
         <p className="text-sm text-muted-foreground mb-4">Completion: {project.date}</p>
         
-        <div className="mb-4 flex justify-center items-center gap-6">
-          <div className="w-[420px] h-[320px] px-12 py-0 flex items-center justify-center rounded-lg">
-            <div className="w-[320px] h-[320px] relative">
+        {/* Mobile-first responsive layout for project image and links */}
+        <div className="mb-4 flex flex-col lg:flex-row lg:justify-center lg:items-center gap-6">
+          {/* Image container - centered on mobile */}
+          <div className="w-full lg:w-[420px] h-[320px] px-4 lg:px-12 py-0 flex items-center justify-center rounded-lg">
+            <div className="w-full max-w-[320px] h-[320px] relative">
               <SwiperCarousel images={project.images} />
             </div>
           </div>
+          
+          {/* Project links - below image on mobile, right side on desktop */}
           {(project.projectLink || project.projectLinks) && (
             <div className="flex flex-col items-center gap-3">
               {project.projectLinks ? (
@@ -874,14 +878,16 @@ What began as curiosity has grown into a focused career path. My goal is not jus
     if (!mounted) return
 
     const handleScroll = () => {
-      const sections = ["hero", "education", "projects", "skills", "experience", "certificates", "blogs"] // 'skills' is still here for scroll tracking
-      const scrollPosition = window.scrollY + 100
+      const sections = ["hero", "education", "projects", "skills", "experience", "certificates", "blogs"]
+      const scrollPosition = window.scrollY + 150 // Increased offset for better detection
 
-      for (const section of sections) {
+      // Check sections from bottom to top to prioritize lower sections
+      for (let i = sections.length - 1; i >= 0; i--) {
+        const section = sections[i]
         const element = document.getElementById(section)
         if (element) {
           const { offsetTop, offsetHeight } = element
-          if (scrollPosition >= offsetTop && scrollPosition < offsetTop + offsetHeight) {
+          if (scrollPosition >= offsetTop) {
             setActiveSection(section)
             break
           }
@@ -890,6 +896,7 @@ What began as curiosity has grown into a focused career path. My goal is not jus
     }
 
     window.addEventListener("scroll", handleScroll)
+    handleScroll() // Call immediately to set initial state
     return () => window.removeEventListener("scroll", handleScroll)
   }, [mounted])
 
@@ -1282,13 +1289,13 @@ What began as curiosity has grown into a focused career path. My goal is not jus
                               loading="lazy"
                             />
                           </CardHeader>
-                          <CardContent className="p-4">
-                            <CardTitle className={`mb-2 text-foreground ${exp.title === 'In-Plant Training' ? 'text-2xl font-bold' : 'text-lg'}`}>{exp.title}</CardTitle>
-                            <CardDescription className="font-semibold text-blue-600 mb-2">
+                          <CardContent className="p-3">
+                            <CardTitle className={`mb-2 text-foreground text-left ${exp.title === 'In-Plant Training' ? 'text-lg font-bold' : 'text-base'}`}>{exp.title}</CardTitle>
+                            <CardDescription className="font-semibold text-blue-600 mb-2 text-sm text-left">
                               {exp.company}
                             </CardDescription>
-                            <div className="flex items-center text-sm text-muted-foreground">
-                              <Calendar className="w-4 h-4 mr-2" />
+                            <div className="flex items-center text-xs text-muted-foreground">
+                              <Calendar className="w-3 h-3 mr-1" />
                               {exp.duration}
                             </div>
                           </CardContent>
@@ -1298,31 +1305,31 @@ What began as curiosity has grown into a focused career path. My goal is not jus
                         </span>
                         </Card>
                       </DialogTrigger>
-                      <DialogContent className="max-w-2xl">
+                      <DialogContent className="max-w-xl max-h-[80vh] overflow-y-auto">
                         <DialogHeader>
-                          <DialogTitle className="text-foreground">{exp.title}</DialogTitle>
-                          <DialogDescription className="text-muted-foreground">
+                          <DialogTitle className="text-base font-semibold text-foreground">{exp.title}</DialogTitle>
+                          <DialogDescription className="text-sm text-muted-foreground">
                             {exp.company} • {exp.duration}
                           </DialogDescription>
                         </DialogHeader>
-                        <div className="space-y-4">
+                        <div className="space-y-3">
                           <Image
                             src={exp.image || "/placeholder.svg"}
                             alt={exp.company}
-                            width={600}
-                            height={300}
-                            className="w-full h-64 object-cover rounded-lg"
+                            width={500}
+                            height={200}
+                            className="w-full h-40 object-cover rounded-lg"
                             loading="lazy"
                           />
-                          <p className="text-foreground leading-relaxed">{exp.description}</p>
+                          <p className="text-sm text-foreground leading-relaxed text-justify">{exp.description}</p>
                           {exp.skills && (
-                            <div className="mt-4">
-                              <h4 className="text-lg font-semibold mb-2 text-foreground">Skills</h4>
-                              <div className="flex flex-wrap gap-3">
+                            <div className="mt-3">
+                              <h4 className="text-sm font-semibold mb-2 text-foreground">Skills</h4>
+                              <div className="flex flex-wrap gap-2">
                                 {exp.skills.map((skill, idx) => (
                                   <span
                                     key={idx}
-                                    className="px-4 py-2 rounded-full bg-white text-black font-semibold text-base whitespace-nowrap border border-black"
+                                    className="px-3 py-1 rounded-full bg-white text-black font-medium text-xs whitespace-nowrap border border-black"
                                   >
                                     {skill}
                                   </span>

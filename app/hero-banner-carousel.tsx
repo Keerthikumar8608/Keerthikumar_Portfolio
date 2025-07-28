@@ -23,7 +23,7 @@ const HeroBannerCarousel: React.FC<HeroBannerCarouselProps> = ({ images }) => {
       navigation={false}
       pagination={false}
       modules={[Autoplay]}
-      className="h-[40vh] md:h-[45vh] w-full"
+      className="h-[50vh] sm:h-[55vh] md:h-[60vh] lg:h-[65vh] w-full"
     >
       {images.map((image, index) => (
         <SwiperSlide key={index}>
@@ -31,7 +31,7 @@ const HeroBannerCarousel: React.FC<HeroBannerCarouselProps> = ({ images }) => {
             <img
               src={image}
               alt={`Banner ${index + 1}`}
-              className="w-full h-full object-cover"
+              className="w-full h-full object-cover object-center"
             />
             {/* Optional overlay for better text readability */}
             <div className="absolute inset-0 bg-black/20"></div>
