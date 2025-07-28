@@ -6,7 +6,8 @@ import { ThemeToggle } from "@/components/theme-toggle"
 import { ImageProtection } from "@/components/image-protection"
 
 export const metadata: Metadata = {
-  title: "Portfolio - Professional Engineering Portfolio",
+  title: "Keerthi kumar M - Mechanical Engineer
+    ",
   description: "A showcase of engineering projects, certificates, and professional experience in mechanical engineering and design.",
   generator: "Next.js",
   keywords: ["engineering", "portfolio", "mechanical engineering", "CAD", "design", "projects"],
