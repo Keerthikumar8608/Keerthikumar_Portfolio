@@ -193,7 +193,7 @@ const CollegeProjectsSection = ({
   setSelectedProject: React.Dispatch<React.SetStateAction<Project | null>>;
 }) => {
   return (
-    <div className="py-20 px-6 bg-white text-black">
+    <div className="py-20 px-4 md:px-6 bg-white text-black">
       <h2 className="text-3xl font-bold text-center mb-16">College Projects</h2>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {projects.map((project, index) => (
@@ -243,7 +243,7 @@ const PersonalProjectsSection = ({
   setSelectedProject: React.Dispatch<React.SetStateAction<Project | null>>;
 }) => {
   return (
-    <div className="py-20 px-6 bg-gray-100 text-black">
+    <div className="py-20 px-4 md:px-6 bg-gray-100 text-black">
       <h2 className="text-3xl font-bold text-center mb-16">Personal Projects</h2>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {projects.map((project, index) => (
@@ -1250,7 +1250,7 @@ What began as curiosity has grown into a focused career path. My goal is not jus
       </section>
 
       {/* New Skills Section - Responsive Layout */}
-      <section id="skills" className="py-20 px-6 bg-background text-foreground transition-colors duration-500">
+      <section id="skills" className="py-20 px-4 md:px-6 bg-background text-foreground transition-colors duration-500">
         <div className="max-w-6xl mx-auto">
           <h2 className="text-3xl md:text-4xl font-bold text-left mb-16">Software I Use</h2>
           <div className="flex flex-wrap md:flex-nowrap justify-center md:justify-start gap-6">
@@ -1272,7 +1272,7 @@ What began as curiosity has grown into a focused career path. My goal is not jus
       </section>
 
       {/* Experience Section - Timeline Style (Reverted) */}
-      <section id="experience" className="py-20 px-6 bg-muted/20 transition-colors duration-500">
+      <section id="experience" className="py-20 px-4 md:px-6 bg-muted/20 transition-colors duration-500">
         <div className="max-w-6xl mx-auto">
           <h2 className="text-3xl md:text-4xl font-bold text-center mb-16 text-foreground">Experience</h2>
           {/* Timeline Container */}
@@ -1592,7 +1592,7 @@ What began as curiosity has grown into a focused career path. My goal is not jus
         </div>
       </section>
       {/* Blogs Section - Now with cards that navigate to dedicated pages */}
-      <section id="blogs" className="py-20 px-6 bg-muted/20 transition-colors duration-500">
+      <section id="blogs" className="py-20 px-4 md:px-6 bg-muted/20 transition-colors duration-500">
         <div className="max-w-6xl mx-auto">
           <h2 className="text-3xl md:text-4xl font-bold text-center mb-16 text-foreground">Blogs</h2>
           <div className="space-y-6">
@@ -1603,7 +1603,7 @@ What began as curiosity has grown into a focused career path. My goal is not jus
         </div>
       </section>
       {/* Footer for Main Page */}
-      <footer className="py-8 px-6 bg-gray-100 dark:bg-gray-900 text-gray-900 dark:text-white transition-colors duration-500">
+      <footer className="py-8 px-4 md:px-6 bg-gray-100 dark:bg-gray-900 text-gray-900 dark:text-white transition-colors duration-500">
         <div className="max-w-6xl mx-auto flex flex-col items-center">
           <div className="w-full flex justify-center items-center relative mb-2">
             <p className="w-full text-center text-gray-600 dark:text-gray-400">© 2025 Keerthi kumar / Page last edited on: 25th July 2025</p>
