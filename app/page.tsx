@@ -890,8 +890,42 @@ What began as curiosity has grown into a focused career path. My goal is not jus
       }
     }
 
+    // Use IntersectionObserver for more reliable section detection
+    const observerOptions = {
+      root: null,
+      rootMargin: '-50% 0px -50% 0px',
+      threshold: 0
+    }
+
+    const observerCallback = (entries: IntersectionObserverEntry[]) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          const sectionId = entry.target.id
+          if (sectionId) {
+            setActiveSection(sectionId)
+          }
+        }
+      })
+    }
+
+    const observer = new IntersectionObserver(observerCallback, observerOptions)
+    
+    // Observe all sections
+    const sections = ["hero", "projects", "experience", "certificates", "blogs"]
+    sections.forEach(sectionId => {
+      const element = document.getElementById(sectionId)
+      if (element) {
+        observer.observe(element)
+      }
+    })
+
+    // Keep scroll handler as fallback
     window.addEventListener("scroll", handleScroll)
-    return () => window.removeEventListener("scroll", handleScroll)
+    
+    return () => {
+      observer.disconnect()
+      window.removeEventListener("scroll", handleScroll)
+    }
   }, [mounted])
 
   const scrollToSection = (sectionId: string) => {
@@ -1569,10 +1603,10 @@ What began as curiosity has grown into a focused career path. My goal is not jus
         </div>
       </section>
       {/* Footer for Main Page */}
-      <footer className="py-8 px-6 bg-gray-900 text-white transition-colors duration-500">
+      <footer className="py-8 px-6 bg-gray-100 dark:bg-gray-900 text-gray-900 dark:text-white transition-colors duration-500">
         <div className="max-w-6xl mx-auto flex flex-col items-center">
           <div className="w-full flex justify-center items-center relative mb-2">
-            <p className="w-full text-center text-gray-400">© 2025 Keerthi kumar / Page last edited on: 25th July 2025</p>
+            <p className="w-full text-center text-gray-600 dark:text-gray-400">© 2025 Keerthi kumar / Page last edited on: 25th July 2025</p>
           </div>
         </div>
       </footer>
