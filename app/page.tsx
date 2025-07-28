@@ -103,7 +103,7 @@ const ProjectModal = ({
     >
       <div
         ref={modalRef}
-        className="bg-background text-foreground rounded-lg shadow-lg max-w-6xl w-full h-[85vh] overflow-y-auto relative p-6"
+        className="bg-background text-foreground rounded-lg shadow-lg max-w-6xl w-full h-[85vh] overflow-y-auto relative p-4 md:p-6 mx-4"
         style={{ border: 'none' }}
       >
         <button
@@ -193,7 +193,7 @@ const CollegeProjectsSection = ({
   setSelectedProject: React.Dispatch<React.SetStateAction<Project | null>>;
 }) => {
   return (
-    <div className="py-20 px-6 bg-white text-black">
+    <div className="py-20 px-4 md:px-6 bg-white text-black">
       <h2 className="text-3xl font-bold text-center mb-16">College Projects</h2>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {projects.map((project, index) => (
@@ -243,7 +243,7 @@ const PersonalProjectsSection = ({
   setSelectedProject: React.Dispatch<React.SetStateAction<Project | null>>;
 }) => {
   return (
-    <div className="py-20 px-6 bg-gray-100 text-black">
+    <div className="py-20 px-4 md:px-6 bg-gray-100 text-black">
       <h2 className="text-3xl font-bold text-center mb-16">Personal Projects</h2>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {projects.map((project, index) => (
@@ -999,7 +999,7 @@ What began as curiosity has grown into a focused career path. My goal is not jus
   }
 
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen overflow-x-hidden">
       {/* Navigation - Mobile-friendly positioning */}
       <NavigationBar activeSection={activeSection} onSectionClick={scrollToSection} />
 

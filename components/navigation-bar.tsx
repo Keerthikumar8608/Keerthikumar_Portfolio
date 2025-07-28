@@ -52,8 +52,8 @@ const NavigationBar: React.FC<NavigationBarProps> = ({ activeSection, onSectionC
   if (!mounted) return null
 
   return (
-    <nav className="fixed right-2 top-4 md:right-4 md:top-1/2 md:transform md:-translate-y-1/2 z-50">
-      <div className="nav-container flex flex-row md:flex-col space-x-1 md:space-x-0 md:space-y-1 rounded-xl p-2 shadow-md border bg-background/95 backdrop-blur-sm min-w-[90px]">
+    <nav className="fixed right-1 top-4 md:right-4 md:top-1/2 md:transform md:-translate-y-1/2 z-50">
+      <div className="nav-container flex flex-row md:flex-col space-x-1 md:space-x-0 md:space-y-1 rounded-xl p-2 shadow-md border bg-background/95 backdrop-blur-sm min-w-[90px] max-w-[95vw]">
         {sections.map((section) => (
           <button
             key={section.id}
